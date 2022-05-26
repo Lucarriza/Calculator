@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 const Calculator = ({ expressions, setExpressions }) => {
   const operators = ["+", "-", "/", "*"];
   const indexStar = (star) => {
@@ -17,9 +20,9 @@ const Calculator = ({ expressions, setExpressions }) => {
 
   /* Function which handle the number buttons, the number will replace 
   the 0 of the begining for the first one, then, it will add each number 
-  after others.*/
+  after others. */
   const handleNumber = (value) => {
-    if ((expressions.split("").length = 1 && expressions === "0")) {
+    if (expressions.split("").length === 1 && expressions === "0") {
       setExpressions((expressions = value));
     } else {
       setExpressions((expressions += value));
@@ -27,12 +30,12 @@ const Calculator = ({ expressions, setExpressions }) => {
   };
 
   /* Function which allows to seperate integers and signs values, 
-    it returns the expressions as an new array.*/
-  const expressionToSeparated = (expressions) => {
+    it returns the expressions as an new array. */
+  const expressionToSeparated = () => {
     expressions = expressions.split("");
-    let seperatedExpressions = [[]];
+    const seperatedExpressions = [[]];
     let count = 0;
-    for (let i = 0; i < expressions.length; i++) {
+    for (let i = 0; i < expressions.length; i += 1) {
       if (!operators.includes(expressions[i])) {
         seperatedExpressions[count] += expressions[i];
       } else {
@@ -48,8 +51,8 @@ const Calculator = ({ expressions, setExpressions }) => {
   /* Main function: this will first check if the converted expressions includes * or / 
   (for resolving multiplications and divisions first) then it will resolve additions 
   and substractions. */
-  const handleResolve = (expressions, setExpressions) => {
-    const seperatedExpressions = expressionToSeparated(expressions);
+  const handleResolve = () => {
+    const seperatedExpressions = expressionToSeparated();
     let result = 0;
 
     /* While loop, it will always search if the expressions includes * and /. */
@@ -57,7 +60,7 @@ const Calculator = ({ expressions, setExpressions }) => {
       seperatedExpressions.includes("*") ||
       seperatedExpressions.includes("/")
     ) {
-      /*Condition which check the index of the * and / sign, it will treat first the lowest one
+      /* Condition which check the index of the * and / sign, it will treat first the lowest one
       (from left to right). "indexOf(something)=>-1" means that 'something' doesn't exist. */
       seperatedExpressions.indexOf("/") !== -1 &&
       seperatedExpressions.indexOf("*") !== -1
@@ -153,23 +156,25 @@ const Calculator = ({ expressions, setExpressions }) => {
           );
     }
 
-    for (let i = 1; i < seperatedExpressions.length; i++) {
+    for (let i = 1; i < seperatedExpressions.length; i += 1) {
       switch (seperatedExpressions[i]) {
         case "+":
           result === 0
             ? (result +=
-                parseInt(seperatedExpressions[i - 1]) +
-                parseInt(seperatedExpressions[i + 1]))
-            : (result += parseInt(seperatedExpressions[i + 1]));
+                Number(seperatedExpressions[i - 1]) +
+                Number(seperatedExpressions[i + 1]))
+            : (result += Number(seperatedExpressions[i + 1]));
           seperatedExpressions[i + 1] = result;
           break;
         case "-":
           result === 0
             ? (result +=
-                parseInt(seperatedExpressions[i - 1]) -
-                parseInt(seperatedExpressions[i + 1]))
-            : (result -= parseInt(seperatedExpressions[i + 1]));
+                Number(seperatedExpressions[i - 1]) -
+                Number(seperatedExpressions[i + 1]))
+            : (result -= Number(seperatedExpressions[i + 1]));
           seperatedExpressions[i + 1] = result;
+          break;
+        default:
           break;
       }
       i += 1;
@@ -280,4 +285,8 @@ const Calculator = ({ expressions, setExpressions }) => {
   );
 };
 
+Calculator.propTypes = {
+  expressions: PropTypes.string.isRequired,
+  setExpressions: PropTypes.func.isRequired,
+};
 export default Calculator;

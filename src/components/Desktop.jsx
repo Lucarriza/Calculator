@@ -1,5 +1,5 @@
-import Calculator from "./Calculator";
 import React, { useState } from "react";
+import Calculator from "./Calculator";
 
 const Desktop = () => {
   const [expressions, setExpressions] = useState("0");
