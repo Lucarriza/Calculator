@@ -1,18 +1,19 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
 
-*, *::before, *::after {
-    margin: 0;
-    box-sizing: border-box;
-  }
-
-  .desktop {
-      width: 100vw;
-      height: 100vh;
-      background-image: url("../../public/assets/background.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  }
+.desktop {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../public/assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

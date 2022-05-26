@@ -17,6 +17,9 @@
   },
   "plugins": ["react", "import"],
   "rules": {
+    "no-nested-ternary": 0,
+    "no-unused-expressions": 0,
+    "no-param-reassign": 0,
     "no-console": "off",
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": [0],
