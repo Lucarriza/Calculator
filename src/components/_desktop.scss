@@ -17,3 +17,29 @@
   justify-content: center;
   align-items: center;
 }
+
+.hell {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../public/assets/hell.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sun {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../public/assets/sun.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
+/* Easter eggs*/
+import axios from "axios";
+
 const Calculator = ({ expressions, setExpressions }) => {
+  /* Easter eggs*/
+  const [isSatan, setIsSatan] = useState(false);
+  const [isSun, setIsSun] = useState(false);
+  const [isJokes, setIsJokes] = useState(false);
+  const [jokes, setJokes] = useState("");
+
+  useEffect(() => {
+    const jokeApi = "https://v2.jokeapi.dev/joke/Programming?type=single";
+    axios
+      .get(jokeApi)
+      .then((res) => res.data)
+      .then((data) => setJokes(data))
+      .catch((error) => console.log(error));
+  }, [isJokes]);
+
   const operators = ["+", "-", "/", "*"];
+
   const indexStar = (star) => {
     return star === "*";
   };
+
   const indexSlash = (slash) => {
     return slash === "/";
   };
@@ -13,6 +33,7 @@ const Calculator = ({ expressions, setExpressions }) => {
   /* Function which handle the sign buttons, the sign will be added 
   uniquely if the last element in the screen is not a sign. */
   const handleSign = (value) => {
+    isJokes && (setIsJokes(false), setExpressions(value));
     if (!operators.includes(expressions[expressions.length - 1])) {
       setExpressions((expressions += value));
     }
@@ -27,6 +48,7 @@ const Calculator = ({ expressions, setExpressions }) => {
     } else {
       setExpressions((expressions += value));
     }
+    isJokes && (setIsJokes(false), setExpressions(value));
   };
 
   /* Function which allows to seperate integers and signs values, 
@@ -55,12 +77,12 @@ const Calculator = ({ expressions, setExpressions }) => {
     const seperatedExpressions = expressionToSeparated();
     let result = 0;
 
-    /* While loop, it will always search if the expressions includes * and /. */
+    /* While loop, it will always search if the expression includes * and / signs. */
     while (
       seperatedExpressions.includes("*") ||
       seperatedExpressions.includes("/")
     ) {
-      /* Condition which check the index of the * and / sign, it will treat first the lowest one
+      /* Condition which checks the index of the * and / signs, it will treat first the lowest one
       (from left to right). "indexOf(something)=>-1" means that 'something' doesn't exist. */
       seperatedExpressions.indexOf("/") !== -1 &&
       seperatedExpressions.indexOf("*") !== -1
@@ -156,6 +178,7 @@ const Calculator = ({ expressions, setExpressions }) => {
           );
     }
 
+    /* */
     for (let i = 1; i < seperatedExpressions.length; i += 1) {
       switch (seperatedExpressions[i]) {
         case "+":
@@ -179,13 +202,29 @@ const Calculator = ({ expressions, setExpressions }) => {
       }
       i += 1;
     }
+    /* Easter eggs zone */
+    result === 666
+      ? ((result = "SATANAS !"), setIsSatan(true))
+      : setIsSatan(false);
+    expressions.join("") === "jokes"
+      ? (setIsJokes(true), (result = `${jokes.joke}`))
+      : setIsJokes(false);
+    result === 713705 ? setIsSun(true) : setIsSun(false);
     setExpressions(result);
   };
-
   return (
-    <div className="desktop">
-      <div className="calculator">
-        <input type="text" className="calculator-screen" value={expressions} />
+    <div className={isSatan ? "hell" : isSun ? "sun" : "desktop"}>
+      <div className={isSun ? "sunDisplay" : "calculator"}>
+        {isJokes ? (
+          <textarea className="jokes-screen" value={expressions}></textarea>
+        ) : (
+          <input
+            type="text"
+            className={isSun ? "sunDisplay__screen" : "calculator__screen"}
+            value={expressions}
+            onChange={(e) => setExpressions(e.target.value)}
+          />
+        )}
 
         <div className="calculator-keys">
           <button
@@ -266,7 +305,11 @@ const Calculator = ({ expressions, setExpressions }) => {
             type="button"
             className="all-clear"
             value="all-clear"
-            onClick={() => setExpressions("0")}
+            onClick={() =>
+              isJokes
+                ? (setIsJokes(false), setExpressions("0"))
+                : setExpressions("0")
+            }
           >
             AC
           </button>
@@ -286,7 +329,8 @@ const Calculator = ({ expressions, setExpressions }) => {
 };
 
 Calculator.propTypes = {
-  expressions: PropTypes.string.isRequired,
+  expressions: PropTypes.number.isRequired,
   setExpressions: PropTypes.func.isRequired,
 };
+
 export default Calculator;
