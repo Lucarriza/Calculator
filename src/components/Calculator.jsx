@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-/* Easter eggs*/
+/* Easter eggs */
 import axios from "axios";
 
 const Calculator = ({ expressions, setExpressions }) => {
-  /* Easter eggs*/
+  /* Easter eggs */
   const [isSatan, setIsSatan] = useState(false);
   const [isSun, setIsSun] = useState(false);
   const [isJokes, setIsJokes] = useState(false);
@@ -216,7 +216,7 @@ const Calculator = ({ expressions, setExpressions }) => {
     <div className={isSatan ? "hell" : isSun ? "sun" : "desktop"}>
       <div className={isSun ? "sunDisplay" : "calculator"}>
         {isJokes ? (
-          <textarea className="jokes-screen" value={expressions}></textarea>
+          <textarea className="jokes-screen" value={expressions} />
         ) : (
           <input
             type="text"
