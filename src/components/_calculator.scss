@@ -10,18 +10,66 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  &__screen {
+    margin-top: 25px;
+    width: 26rem;
+    font-size: 3rem;
+    height: 6rem;
+    border-radius: 25px;
+    border: solid 2px rebeccapurple;
+    background-color: #252525;
+    color: rgb(254, 236, 44);
+    text-align: right;
+    box-shadow: inset 2px 2px 2px 1px rgba(255, 255, 255, 0.05),
+      inset 2px 2px 2px 1px rgba(0, 0, 0, 0.45),
+      inset 2px 2px 2px 1px rgba(255, 255, 255, 0.15),
+      1px 1px 1px 1px rgb(227, 221, 221);
+  }
 }
 
-.calculator-screen {
+.sunDisplay {
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 45px;
+  background-image: url("../../public/assets/metal.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  box-shadow: 4px 4px 4px 4px, inset 4px 4px 4px 2px rgba(255, 255, 255, 0.45);
+  width: 500px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  &__screen {
+    margin-top: 25px;
+    width: 26rem;
+    font-size: 3rem;
+    height: 6rem;
+    border-radius: 25px;
+    transform: rotate(180deg);
+    border: solid 2px rebeccapurple;
+    background-color: #252525;
+    color: rgb(254, 236, 44);
+    text-align: right;
+    box-shadow: inset 2px 2px 2px 1px rgba(255, 255, 255, 0.05),
+      inset 2px 2px 2px 1px rgba(0, 0, 0, 0.45),
+      inset 2px 2px 2px 1px rgba(255, 255, 255, 0.15),
+      1px 1px 1px 1px rgb(227, 221, 221);
+  }
+}
+
+.jokes-screen {
   margin-top: 25px;
   width: 26rem;
-  font-size: 3rem;
+  display: flex;
+  padding: 1rem;
+  flex-wrap: wrap;
+  text-align: center;
+  font-size: 1rem;
   height: 6rem;
   border-radius: 25px;
   border: solid 2px rebeccapurple;
   background-color: #252525;
   color: rgb(254, 236, 44);
-  text-align: right;
   box-shadow: inset 2px 2px 2px 1px rgba(255, 255, 255, 0.05),
     inset 2px 2px 2px 1px rgba(0, 0, 0, 0.45),
     inset 2px 2px 2px 1px rgba(255, 255, 255, 0.15),
@@ -51,6 +99,7 @@ button {
 
 button:hover {
   background-color: #949494;
+  cursor: pointer;
 }
 
 .operator {
